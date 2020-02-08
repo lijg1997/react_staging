@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import About from './Components/about/About';
-import Home from './Components/home/Home';
-import { Link, Route } from 'react-router-dom';
+import About from './pages/about/about';
+import Home from './pages/home/home';
+import { NavLink, Route, Redirect, Switch } from 'react-router-dom';
 
 export default class App extends Component {
   render() {
@@ -17,19 +17,22 @@ export default class App extends Component {
         <div className="row">
           <div className="col-xs-2 col-xs-offset-2">
             <div className="list-group">
-              <Link className="list-group-item" to="/about">
+              <NavLink className="list-group-item" activeClassName="active" to="/about">
                 About
-              </Link>
-              <Link className="list-group-item" to="/home">
+              </NavLink>
+              <NavLink className="list-group-item" activeClassName="active" to="/home">
                 Home
-              </Link>
+              </NavLink>
             </div>
           </div>
           <div className="col-xs-6">
             <div className="panel">
               <div className="panel-body">
-                <Route path="/about" component={About} />
-                <Route path="/home" component={Home} />
+                <Switch>
+                  <Route path="/about" component={About} />
+                  <Route path="/home" component={Home} />
+                  <Redirect to="/about" />
+                </Switch>
               </div>
             </div>
           </div>
